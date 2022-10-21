@@ -1,0 +1,275 @@
+{% extends 'base.html' %}
+{% include 'header.html' %}
+
+
+
+{% block title %} Home {% endblock %}
+
+
+
+{% block body %}
+
+<div class="container" style='display:flex;justify-content:space-between;align-items:flex-start;margin-left:0px;padding:30px;height:100vh;width:100%;margin-top:0px;'>
+   <nav class="sidebar close">
+      <header>
+        <div class="image-text">
+         
+    
+        
+        </div>
+    
+        <i class='bx bx-chevron-right toggle'></i>
+      </header>
+    
+      <div class="menu-bar">
+        <div class="menu" style="position:fixed;left:-10px;top:80px;">
+    
+       
+    
+          <ul class="menu-links">
+            <li class="nav-link">
+              <a href="#">
+                <span class="text nav-text"> <a href="http://127.0.0.1:5000/dashboard">HOME</a></span>
+              </a>
+            </li>
+
+            <li class="nav-link">
+               <a href="#">
+                 <i class='bx bx-pie-chart-alt icon'></i>
+                 <span class="text nav-text"><a href="http://127.0.0.1:5000/add">ADD CLIENT</a></span>
+               </a>
+             </li>
+
+            <li class="nav-link">
+              <a href="http://127.0.0.1:5000/showtask">
+                <span class="text nav-text">ADD TASK</span>
+              </a>
+            </li>
+    
+            <li class="nav-link" style=''>
+              <a href="http://127.0.0.1:5000/showtask">
+                <span class="text nav-text"><a href="http://127.0.0.1:5000/showtask">SHOW TASK</a></span>
+              </a>
+            </li>
+            <li class="nav-link">
+              <a href="#">
+             
+                <span class="text nav-text"><a href="/today">TODAY'S TASK</a></span>
+              </a>
+            </li>
+    
+            
+   
+            <li class="nav-link mt-5">
+              <a href="/">
+                <i class='bx bx-pie-chart-alt icon'></i>
+                <span class="text nav-text">LOG OUT</span>
+              </a>
+            </li>
+            
+          </ul>
+        </div>
+    
+       
+      </div>
+    
+    </nav>
+   
+    <div class="row" style='margin-left:300px;width:1300px;'>
+        <div class="col md-12">
+          <form  action='{{url_for('Index')}}' method="POST">
+         
+         
+      
+
+          </form> 
+        
+ 
+            
+            <div class="jumbotron p-3" style='width:1200px;padding:20px;'>
+
+              
+                
+
+
+                {% with messages = get_flashed_messages() %}
+
+                {% if messages %}
+
+                {% for message in messages %}
+
+                <div class="alert alert-success alert-dismissable" role="alert">
+
+                    <button type="button" class="close" data-dismiss="alert" aria-label="close">
+
+                        <span aria-hidden="true">x</span>
+
+                    </button>
+
+
+                {{message}}
+
+
+                </div>
+
+
+                {% endfor %}
+
+                {% endif %}
+                {% endwith %}
+
+                
+                <table class="table table-hover table-dark" id="table">
+
+                    <tr>
+
+                      {% for row in data %}
+                      <ul>
+                        <p>TODYAY'S TOTAL TASK</p></li>
+                        <li style='list-style-type:none;'><h3>{{row.0}}</h3>
+                        <!--<li><h3>42</h3><p>YESTERDAYS TASK</p></li>-->
+             {% endfor %}
+                    </ul>
+                </div>
+                        
+                  
+
+                    </tr>
+
+
+                   {% for row in data %}
+              
+
+
+                  <!-- Modal Edit TASK-->
+<div id="modaledit{{row.0}}" class="modal fade" role="dialog">
+   <div class="modal-dialog">
+
+
+      <div class="modal-content">
+
+
+         <div class="modal-header">
+
+
+            <h4 class="modal-title">Update Information</h4>
+
+
+         </div>
+
+
+         <div class="modal-body">
+
+
+            <form action="{{url_for('update')}}" method="POST">
+
+
+   
+
+
+             
+
+                 
+
+
+   
+       
+
+            <div class="form-group">
+               <label for='d'>DATE:</label>
+               <input type='date' name='d' value="{{row.6}}">
+            </div>
+            <div class="form-group">
+              <label for='dRAG'>DRAG</label>
+              
+           </div>
+               <div class="form-group">
+
+
+                  <button class="btn btn-primary" type="submit">Update</button>
+
+
+               </div>
+
+
+            </form>
+
+
+         </div>
+
+
+         <div class="modal-footer">
+
+
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+
+         </div>
+
+
+      </div>
+
+
+   </div>
+
+</div>
+
+
+                    {% endfor %}
+
+
+                </table>
+
+
+            </div>
+
+
+
+                  <!--======================================================== Modal Add TASK=========================================================-->
+
+
+<div id="mymodal" class="modal fade" role="dialog">
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="modal-header">
+
+            <h4 class="modal-title">ADD TASK</h4>
+         </div>
+         <div class="modal-body">
+
+            <form action="{{url_for('insert')}}" method="POST">
+
+
+
+             
+
+            
+
+            </form>
+
+
+         </div>
+
+
+        
+      </div>
+
+
+   </div>
+
+
+</div>
+
+
+
+
+
+        </div>
+
+    </div>
+
+
+</div>
+
+
+{% endblock %}

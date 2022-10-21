@@ -1,0 +1,693 @@
+{% extends 'b.html' %}
+{% include 'h.html' %}
+
+
+
+{% block title %} Home {% endblock %}
+
+
+
+{% block body %}
+<style>
+   @import url('https://fonts.googleapis.com/css2?family=Fira+Sans:wght@100;200;300;400;500;600;700;800;900&display=swap');
+*{
+padding: 0; margin: 0; user-select: none;
+font-family: 'Fira Sans', sans-serif;
+}
+body{
+width: 100%;
+min-height: 100vh;
+background: linear-gradient(to bottom, #323232 0%, #3F3F3F 40%, #1C1C1C 150%), linear-gradient(to top, rgba(255,255,255,0.40) 0%, rgba(0,0,0,0.25) 200%);
+ background-blend-mode: multiply;
+}
+::-webkit-scrollbar {
+width: 8px;
+}
+::-webkit-scrollbar-track {
+background: white; 
+}
+::-webkit-scrollbar-thumb {
+background: linear-gradient(0, #845EC2, #D65DB1, #FF6F91, #FF9671, #FFC75F, #F9F871); border-radius: 100px;
+}
+::-webkit-scrollbar-thumb:hover {
+background: #D65DB1; 
+}
+a{
+text-decoration: transparent;
+}
+#nav{
+width: 96%; height: 60px; margin: 10px 2% 10px 2%;
+background-color: rgba(255,255,255,0.2);
+display: flex; align-items: center; justify-content: space-evenly;
+box-shadow: 0 0 10px rgba(0,0,0,0.1);
+border-radius: 6px;
+}
+.navLeft{
+width: 20%; height: 100%;
+display: flex; align-items: center;
+}
+.navLeft h1{
+font-size: 35px; color: black;
+text-shadow: 0 0 1px black;
+}
+.search{
+width: 35%;
+height: 100%;
+display: flex; align-items: center;
+justify-content: center;
+}
+.search input[type="text"]{
+width: 100%; height: 25px;
+outline: none; border: none;
+padding: 0 5px 0 5px;
+background-color: transparent;
+font-family: 'Fira Sans', sans-serif;
+font-weight: 700;
+border-bottom: 3px solid #D65DB1;
+color: rgba(0,0,0,0.7);
+}
+.search img{
+width: 15px; height: 15px;
+cursor: pointer;
+}
+.navRight{
+width: 15%; display: flex;
+align-items: center; justify-content: center;
+}
+#navList{
+width: 100%;
+display: flex; align-items: center;
+justify-content: space-evenly;
+}
+#navList li{
+display: flex; align-items: center; justify-content: center;
+}
+#navList img{
+width: 25px; height: 25px;
+}
+#navList li a span{
+display: none;
+}
+#mid{
+width: 96%; padding: 10px 2% 10px 2%;
+display: flex; flex-wrap: wrap;
+}
+.midLeft, .midRight{
+width: 180px; background-color: rgba(255,255,255,0.2);
+margin: 5px 2% 5px 0; border-radius: 8px;
+height: 600px; box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+.list{
+height: 300px; display: flex; align-items: center; width: 180px;
+}
+.list ul li{
+display: flex; align-items: center;
+margin: 5px; width: 170px;
+height: 50px;
+cursor: pointer;
+}
+.list ul li:hover, .active{
+background-color: #D65DB1; border-radius: 5px;
+}
+.list img{
+width: 20px; height: 20px; float: left;
+padding-left: 10px;
+}
+.list ul li span{
+padding-left: 10px; font-weight: 700;
+}
+li{
+list-style: none;
+}
+.midRight{
+width: 500px; display: flex; flex-direction: column;
+align-items: center; justify-content: space-evenly;
+}
+.midRight h2{
+font-weight: 900; font-size: 30px;
+}
+.midRight li{
+margin: 8px; cursor: pointer;
+padding: 5px; background-color: rgba(255,255,255,0.1);
+border-radius: 8px;
+}
+.midRight li h3{
+color: #845EC2; font-weight: 700;
+}
+.midMid{
+width: 50%;
+flex-direction: column;
+display: flex; align-items: center;
+margin: 5px 2% 5px 0;
+}
+.midMid1, .midMid2{
+background-color: rgba(255,255,255,0.2); width: 100%;
+display: flex; justify-content: space-evenly;
+align-items: center; height: 100px; border-radius: 8px;
+box-shadow: 0 0 10px rgba(0,0,0,0.1);
+margin-bottom: 20px; flex-wrap: wrap;
+}
+.topHead{
+width: 30%;
+}
+.topHead h1{
+font-size: 35px; font-weight: 900;
+}
+.topHead p{
+color: #845EC2; font-weight: 900;
+}
+.midMid1 ul{
+width: 60%; text-align: center;
+display: flex; align-items: center; justify-content: space-evenly;
+}
+.midMid1 ul li h3{
+font-weight: 900; font-size: 30px;
+}
+.midMid2{
+height: 50px;
+}
+.midMid2 ul{
+width: 90%; justify-content: space-evenly; align-items: center; height: 90%;
+display: flex;
+}
+.midMid2 ul li{
+cursor: pointer; font-size: 15px;
+font-weight: 700; width: 22%; justify-content: center; align-items: center; height: 80%;
+display: flex;
+}
+.midMid2 ul hr{
+width: 1px; height: 18px; background-color: black; border: none;
+}
+.activeMid{
+color: #845EC2;
+border-radius: 2px;
+}
+.midMid3{
+width: 100%; border-radius: 8px; display: flex;
+flex-wrap: wrap; align-items: center; justify-content: space-evenly;
+}
+.progress{
+display: flex; flex-direction: column; justify-content: space-evenly;
+width: 40%; background-color: rgba(255,255,255,0.1); margin: 2%;
+padding: 3%; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+progress{
+height: 20px;
+width: 100%;
+}
+.progress h3{
+font-size: 22px; color: black;
+}
+.progress a{
+font-size: 15px; height: 35px;
+margin-top: 10px; display: flex; align-items: center;
+justify-content: center; border-radius: 8px;
+width: 40%; text-align: center;
+background-color: black; color: white;
+}
+#footer{
+float: right;
+}
+#footer a{
+text-transform: uppercase;
+font-weight: 900;
+color: black;
+}
+@media only screen and (max-width: 900px) {
+#nav{
+justify-content: space-between;
+}
+.navLeft{
+margin-left: 10px;
+}
+.menu{
+width: 40px; height: 40px;
+border-radius: 50%;
+display: flex;
+align-items: center;
+justify-content: center;
+cursor: pointer;
+}
+.menu .bar{
+display: block;
+position: absolute;
+width: 25px; height: 2px;
+background-color: black;
+}
+.b1{
+transform: translateY(-5px);
+}
+.b3{
+transform: translateY(5px);
+}
+#navList{
+display: none;
+flex-direction: column;
+position: absolute;
+top: 90px;
+height: 200px;
+z-index: 100; box-shadow: 0 0 10px rgba(0,0,0,0.1);
+border-radius: 5px;
+left: 0;
+width: 96%;
+margin: 5px 2% 5px 2%;
+background-color: #fff;
+}
+#navList li a{
+text-align: left;
+width: 120px;
+padding: 5px 0;
+}
+#navList li img{
+float: left; width: 18px; height: 18px;
+}
+#navList li a span{
+display: flex; font-size: 16px;
+padding: 0 5px; font-weight: 400;
+color: black;
+}
+.search{
+display: none;
+}
+.symbol{
+display: block;
+width: 50px; height: 50px;
+background-color: rgba(255,255,255,0.2);
+display: flex; align-items: center; justify-content: center;
+box-shadow: 0 0 10px rgba(0,0,0,0.1);
+border-radius: 50%; cursor: pointer; position: absolute;
+right: 5px; bottom: 5px; position: fixed;
+}
+.cross{
+width: 25px; height: 3px;
+background-color: black;
+position: absolute; border-radius: 100px;
+}
+.c2{
+transform: rotate(90deg);
+}
+.midLeft{
+display: none;
+background-color: white;
+width: 50px; height: 300px;
+position: absolute; bottom: 70px;
+right: 0; position: fixed;
+}
+.list{
+width: 50px;
+}
+.list ul li{
+width: 40px;
+}
+.list ul li span{
+display: none;
+}
+.midRight{
+width: 98%;
+}
+.midRight ul li{
+width: 95%;
+}
+.midMid{
+width: 100%;
+}
+.midMid1{
+flex-direction: column; height: 200px;
+}
+.topHead{
+width: 100%; text-align: center;
+}
+.midMid1 ul{
+width: 100%;
+}
+.midMid2 hr{
+display: none;
+}
+.progress{
+width: 100%; min-height: 200px;
+}
+}
+h1{
+   margin:0;
+   color:#fff; 
+   padding:10px;
+   
+}
+
+aside{
+   background:transparent; 
+   width:250px;
+   height:100vh;
+   position:fixed;
+   transition:.3s;
+   left:-250px;top:30PX;
+   transition-timing-function: cubic-bezier(0.9,0,1,1);
+}
+aside.close{
+   left:0;
+   transition:.3s;
+   transition-timing-function: cubic-bezier(0.9,0,1,1);
+}
+nav a{
+   display: block; 
+   color:#fff; 
+   text-decoration:none;
+   padding:10px
+}
+nav a:hover{
+   background:#ff9900;
+   color:black;
+} 
+aside button{
+   border:none; 
+   background:none; 
+   position: absolute;
+   right:-60px; 
+   top:7px; 
+   font-size:30px; 
+   transform:rotate(90deg); 
+   display:inline-block; 
+   cursor:pointer
+}
+.toggle{
+   color:#ff9900;
+   
+}
+#d{
+   padding:17px;
+   border:none;
+   border:1px solid black;
+   background-color:rgba(184, 119, 7,0.7);
+}
+</style>
+<div class="container" style='display:flex;justify-content:center;align-items:flex-start;margin:40px auto;padding:20px;height:100vh;width:100%;margin-top:0px;'>
+   <nav class="sidebar close">
+      <div>
+        <div class="container">
+        <aside>
+          <button class="toggle">|||</button>
+          <h1>& WE MEDIA</h1>
+          <nav>
+            <a href="http://127.0.0.1:5000/allclient">ADD CLIENT</a>
+            <a href="http://127.0.0.1:5000/showtask">ADD TASK</a>
+            <a href="http://127.0.0.1:5000">LOGOUT</a>
+          
+          </nav>
+        </aside>
+          
+          </div>
+        </div>
+         </nav>
+    <div class="row"  style=''>
+        <div class="col md-12">
+
+            <div class="jumbotron p-3" style=''>
+             
+                <h2>Manage <b>Client </b>  <button type="button"  class="btn btn-success float-right"
+                data-toggle="modal" data-target="#mymodal">Add New Clients</button>  </h2>
+               
+
+                {% with messages = get_flashed_messages() %}
+
+                {% if messages %}
+
+                {% for message in messages %}
+
+                <div class="alert alert-success alert-dismissable" role="alert">
+
+                    <button type="button" class="close" data-dismiss="alert" aria-label="close">
+
+                        <span aria-hidden="true">x</span>
+
+                    </button>
+
+
+                {{message}}
+
+
+                </div>
+
+
+                {% endfor %}
+
+                {% endif %}
+                {% endwith %}
+
+
+                <table class="table table-hover table-dark table-responsive" id='table'>
+                 
+                    <tr>
+
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Project</th>
+                        <th>Action</th>
+
+                    </tr>
+
+
+                   {% for row in data1 %}
+                    <tr>
+                        <td>{{row.0}}</td>
+                        <td>{{row.1}}</td>
+                        <td>{{row.2}}</td>
+                        <td>{{row.3}}</td>
+                        <td>{{row.4}}</td>
+
+                        <td>
+                            <a href="/edit/{{row.0}}" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#modaledit{{row.0}}">Edit</a>
+                            <a href="/dele/{{row.0}}" class="btn btn-danger btn-xs" onclick="return confirm('Are You Sure To Delete ?')">Delete</a>
+
+
+                        </td>
+
+                    </tr>
+
+
+                  <!-- Modal Edit Employee-->
+<div id="modaledit{{row.0}}" class="modal fade" role="dialog">
+   <div class="modal-dialog">
+
+
+      <div class="modal-content">
+
+
+         <div class="modal-header">
+
+
+            <h4 class="modal-title">Update Information</h4>
+
+
+         </div>
+
+
+         <div class="modal-body">
+
+
+            <form action="{{url_for('edit')}}" method="POST">
+
+
+               <div class="form-group">
+
+
+                  <label>Name:</label>
+                   <input type="hidden"  name="id" value="{{row.0}}">
+
+                  <input type="text" class="form-control" name="name" value="{{row.1}}">
+
+
+               </div>
+
+
+
+               <div class="form-group">
+
+
+                  <label>Email:</label>
+
+                  <input type="text" class="form-control" name="email" value="{{row.2}}">
+
+
+               </div>
+
+
+               <div class="form-group">
+
+
+                  <label>Phone:</label>
+
+                  <input type="text" class="form-control" name="phone" value="{{row.3}}">
+
+
+               </div>
+               <div class="form-group">
+
+
+                  <label>Project</label>
+                   
+
+                  <input type="text" class="form-control" name="project" value="{{row.4}}">
+
+
+               </div>
+
+
+               <div class="form-group">
+
+
+                  <button class="btn btn-primary" type="submit">Update</button>
+
+
+               </div>
+
+
+            </form>
+
+
+         </div>
+
+
+         <div class="modal-footer">
+
+
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+
+         </div>
+
+
+      </div>
+
+
+   </div>
+
+</div>
+
+
+                    {% endfor %}
+
+
+                </table>
+
+
+            </div>
+
+
+
+                  <!-- Modal Add Employee-->
+
+
+<div id="mymodal" class="modal fade" role="dialog">
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="modal-header">
+
+            <h4 class="modal-title">Add Client</h4>
+         </div>
+         <div class="modal-body">
+
+            <form action="{{url_for('i')}}" method="POST">
+
+
+               <div class="form-group">
+
+                  <label>Name:</label>
+                  <input type="text" class="form-control" name="name" required="1">
+
+
+               </div>
+
+
+                <div class="form-group">
+
+
+                  <label>Email:</label>
+                  <input type="text" class="form-control" name="email" required="1">
+
+
+               </div>
+
+
+                <div class="form-group">
+
+
+                  <label>Phone:</label>
+                  <input type="text" class="form-control" name="phone" required="1">
+
+
+               </div>
+               <div class="form-group">
+
+
+                  <label>Project</label>
+                   
+
+                  <input type="text" class="form-control" name="project" >
+
+
+               </div>
+
+
+               <div class="form-group">
+
+
+                 <button class="btn btn-primary" type="submit">ADD CLIENT</button>
+
+
+               </div>
+<!--===============================================================================================-->
+
+
+            </form>
+
+
+         </div>
+
+
+         <div class="modal-footer">
+
+
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+
+         </div>
+
+
+      </div>
+
+
+   </div>
+
+
+</div>
+
+
+
+
+
+        </div>
+
+    </div>
+
+
+</div>
+<script>
+   $(document).ready(function(){
+      $(".toggle").click(function(){
+        $("aside").toggleClass("close")
+      });
+     });
+    
+    // click outside
+    $(document).mouseup(function(e){ 
+      var container = $("aside");
+        if (!container.is(e.target) && container.has(e.target).length === 0) 
+        {
+             $("aside").removeClass("close")
+        }
+    });
+</script>
+
+{% endblock %}

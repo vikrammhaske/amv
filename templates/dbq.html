@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Fira+Sans:wght@100;200;300;400;500;600;700;800;900&display=swap');
+*{
+    padding: 0; margin: 0; user-select: none;
+    font-family: 'Fira Sans', sans-serif;
+}
+body{
+    width: 100%;
+    min-height: 100vh;
+    background-image: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%);
+}
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background: white; 
+}
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(0, #845EC2, #D65DB1, #FF6F91, #FF9671, #FFC75F, #F9F871); border-radius: 100px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #D65DB1; 
+}
+a{
+    text-decoration: transparent;
+}
+#nav{
+    width: 96%; height: 60px; margin: 10px 2% 10px 2%;
+    background-color: rgba(255,255,255,0.2);
+    display: flex; align-items: center; justify-content: space-evenly;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    border-radius: 6px;
+}
+.navLeft{
+    width: 20%; height: 100%;
+    display: flex; align-items: center;
+}
+.navLeft h1{
+    font-size: 35px; color: black;
+    text-shadow: 0 0 1px black;
+}
+.search{
+    width: 35%;
+    height: 100%;
+    display: flex; align-items: center;
+    justify-content: center;
+}
+.search input[type="text"]{
+    width: 100%; height: 25px;
+    outline: none; border: none;
+    padding: 0 5px 0 5px;
+    background-color: transparent;
+    font-family: 'Fira Sans', sans-serif;
+    font-weight: 700;
+    border-bottom: 3px solid #D65DB1;
+    color: rgba(0,0,0,0.7);
+}
+.search img{
+    width: 15px; height: 15px;
+    cursor: pointer;
+}
+.navRight{
+    width: 15%; display: flex;
+    align-items: center; justify-content: center;
+}
+#navList{
+    width: 100%;
+    display: flex; align-items: center;
+    justify-content: space-evenly;
+}
+#navList li{
+    display: flex; align-items: center; justify-content: center;
+}
+#navList img{
+    width: 25px; height: 25px;
+}
+#navList li a span{
+    display: none;
+}
+#mid{
+    width: 96%; padding: 10px 2% 10px 2%;
+    display: flex; flex-wrap: wrap;
+}
+.midLeft, .midRight{
+    width: 180px; background-color: rgba(255,255,255,0.2);
+    margin: 5px 2% 5px 0; border-radius: 8px;
+    height: 600px; box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+.list{
+    height: 300px; display: flex; align-items: center; width: 180px;
+}
+.list ul li{
+    display: flex; align-items: center;
+    margin: 5px; width: 170px;
+    height: 50px;
+    cursor: pointer;
+}
+.list ul li:hover, .active{
+    background-color: #D65DB1; border-radius: 5px;
+}
+.list img{
+    width: 20px; height: 20px; float: left;
+    padding-left: 10px;
+}
+.list ul li span{
+    padding-left: 10px; font-weight: 700;
+}
+li{
+    list-style: none;
+}
+.midRight{
+    width: 500px; display: flex; flex-direction: column;
+    align-items: center; justify-content: space-evenly;
+}
+.midRight h2{
+    font-weight: 900; font-size: 30px;
+}
+.midRight li{
+    margin: 8px; cursor: pointer;
+    padding: 5px; background-color: rgba(255,255,255,0.1);
+    border-radius: 8px;
+}
+.midRight li h3{
+    color: #845EC2; font-weight: 700;
+}
+.midMid{
+    width: 50%;
+    flex-direction: column;
+    display: flex; align-items: center;
+    margin: 5px 2% 5px 0;
+}
+.midMid1, .midMid2{
+    background-color: rgba(255,255,255,0.2); width: 100%;
+    display: flex; justify-content: space-evenly;
+    align-items: center; height: 100px; border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    margin-bottom: 20px; flex-wrap: wrap;
+}
+.topHead{
+    width: 30%;
+}
+.topHead h1{
+    font-size: 35px; font-weight: 900;
+}
+.topHead p{
+    color: #845EC2; font-weight: 900;
+}
+.midMid1 ul{
+    width: 60%; text-align: center;
+    display: flex; align-items: center; justify-content: space-evenly;
+}
+.midMid1 ul li h3{
+    font-weight: 900; font-size: 30px;
+}
+.midMid2{
+    height: 50px;
+}
+.midMid2 ul{
+    width: 90%; justify-content: space-evenly; align-items: center; height: 90%;
+    display: flex;
+}
+.midMid2 ul li{
+    cursor: pointer; font-size: 15px;
+    font-weight: 700; width: 22%; justify-content: center; align-items: center; height: 80%;
+    display: flex;
+}
+.midMid2 ul hr{
+    width: 1px; height: 18px; background-color: black; border: none;
+}
+.activeMid{
+    color: #845EC2;
+    border-radius: 2px;
+}
+.midMid3{
+    width: 100%; border-radius: 8px; display: flex;
+    flex-wrap: wrap; align-items: center; justify-content: space-evenly;
+}
+.progress{
+    display: flex; flex-direction: column; justify-content: space-evenly;
+    width: 40%; background-color: rgba(255,255,255,0.1); margin: 2%;
+    padding: 3%; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+progress{
+    height: 20px;
+    width: 100%;
+}
+.progress h3{
+    font-size: 22px; color: black;
+}
+.progress a{
+    font-size: 15px; height: 35px;
+    margin-top: 10px; display: flex; align-items: center;
+    justify-content: center; border-radius: 8px;
+    width: 40%; text-align: center;
+    background-color: black; color: white;
+}
+#footer{
+    float: right;
+}
+#footer a{
+    text-transform: uppercase;
+    font-weight: 900;
+    color: black;
+}
+@media only screen and (max-width: 900px) {
+    #nav{
+        justify-content: space-between;
+    }
+    .navLeft{
+        margin-left: 10px;
+    }
+    .menu{
+        width: 40px; height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+    }
+    .menu .bar{
+        display: block;
+        position: absolute;
+        width: 25px; height: 2px;
+        background-color: black;
+    }
+    .b1{
+        transform: translateY(-5px);
+    }
+    .b3{
+        transform: translateY(5px);
+    }
+    #navList{
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 90px;
+        height: 200px;
+        z-index: 100; box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        border-radius: 5px;
+        left: 0;
+        width: 96%;
+        margin: 5px 2% 5px 2%;
+        background-color: #fff;
+    }
+    #navList li a{
+        text-align: left;
+        width: 120px;
+        padding: 5px 0;
+    }
+    #navList li img{
+        float: left; width: 18px; height: 18px;
+    }
+    #navList li a span{
+        display: flex; font-size: 16px;
+        padding: 0 5px; font-weight: 400;
+        color: black;
+    }
+    .search{
+        display: none;
+    }
+    .symbol{
+        display: block;
+        width: 50px; height: 50px;
+        background-color: rgba(255,255,255,0.2);
+        display: flex; align-items: center; justify-content: center;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        border-radius: 50%; cursor: pointer; position: absolute;
+        right: 5px; bottom: 5px; position: fixed;
+    }
+    .cross{
+        width: 25px; height: 3px;
+        background-color: black;
+        position: absolute; border-radius: 100px;
+    }
+    .c2{
+        transform: rotate(90deg);
+    }
+    .midLeft{
+        display: none;
+        background-color: white;
+        width: 50px; height: 300px;
+        position: absolute; bottom: 70px;
+        right: 0; position: fixed;
+    }
+    .list{
+        width: 50px;
+    }
+    .list ul li{
+        width: 40px;
+    }
+    .list ul li span{
+        display: none;
+    }
+    .midRight{
+        width: 98%;
+    }
+    .midRight ul li{
+        width: 95%;
+    }
+    .midMid{
+        width: 100%;
+    }
+    .midMid1{
+        flex-direction: column; height: 200px;
+    }
+    .topHead{
+        width: 100%; text-align: center;
+    }
+    .midMid1 ul{
+        width: 100%;
+    }
+    .midMid2 hr{
+        display: none;
+    }
+    .progress{
+        width: 100%; min-height: 200px;
+    }
+}
+#option li:hover{
+    background:orange;
+    color:black;
+}
+        </style>
+    </head>
+    <body>
+        <section id="nav">
+            <!--<div class="navLeft">
+                <h1>Welcome</h1>
+            </div>-->
+           <!--- <div class="search">
+                <input type="text" placeholder="Search...">
+                <img src="https://cdn-icons-png.flaticon.com/128/149/149852.png" alt="">
+            </div>-->
+            <div class="navRight">
+                <div class="menu" onclick="toggle()">
+                    <span class="bar b1"></span>
+                    <span class="bar b2"></span>
+                    <span class="bar b3"></span>
+                </div>
+                <!---<ul id="navList">
+                    <li><a href="#"><img src="https://cdn-icons-png.flaticon.com/128/561/561127.png" alt=""><span></span></a></li>
+                    <li><a href="#"><img src="https://cdn-icons.flaticon.com/png/128/2529/premium/2529521.png?token=exp=1656315685~hmac=cbcb312235267fc52735e1a44572af88" alt=""><span>NOTIFICATION</span></a></li>
+                    <li><a href="#"><img src="https://cdn-icons-png.flaticon.com/128/709/709579.png" alt=""><span>TIMELINE</span></a></li>
+                </ul>-->
+            </div>
+        </section>
+        <section id="mid">
+            <div class="symbol" onclick="show()">
+                <span class="cross c1"></span>
+                <span class="cross c2"></span>
+            </div>
+            <div class="midLeft" id="work">
+                <div class="list">
+                    <ul>
+                        <li class="active"><a href="http://127.0.0.1:5000/count"><span>DASHBOARD</span></a></li>
+                        <li><span><a href="http://127.0.0.1:5000/add">ADD CLIENT</a></span></li>
+                        <li><span><a href="http://127.0.0.1:5000/showtask">ADD TASK</a></span></li>
+                        <li><span>TODAY'S TASK</span></li>
+                        <li><img src="https://cdn-icons-png.flaticon.com/128/1286/1286853.png" alt=""><a href='http://127.0.0.1:5000/'><span>LOG OUT</span></a></li>    
+                    </ul>
+                </div>
+            </div>
+            <div class="midMid">
+                <div class="midMid1">
+                    <div class="topHead">
+                        <h1>Dashboard</h1>
+                        <p>Welcome The &WE MEDIA</p>
+                    </div>
+                    <ul>
+                        <h1><a href='/dbq'> IN QUE</a></h1>
+                        <tr>
+
+                            {% for row in data %}
+                            <ul>
+                              </li>
+                              <li style='list-style-type:none;'><h3>{{row.0}}</h3>
+                              <!--<li><h3>42</h3><p>YESTERDAYS TASK</p></li>-->
+                   {% endfor %}
+                          </ul>
+                      </div>
+             
+                    </ul>
+                </div>
+                <div class="midMid2"  style='margin-top:200px;'>
+                    <ul id="option">
+                        <li class="activeMid"> <a href='/dbc'>COMPLETED</a></li>
+                        
+                  
+                        
+    
+                              
+                        <hr>
+                        <li class="inactive"><a href='/dbw'>WORK IN PROGRESS</a></li><hr>
+                        <li class="inactive"><a href='/dbp'>PENDING</a></li><hr>
+                        <li class="inactive"><a href="/dbq">IN QUE</a></li>
+                    </ul>
+                    <div>
+                        
+                    </div>
+                </div>
+               
+                  <!--- <div class="progress2 progress">
+                        <p>In Progress</p>
+                        <h3>XYZAb Development</h3>
+                        <p>Completed: 21/80</p>
+                        <a href="#">Continue</a><br>
+                        <progress value="21" max="80"></progress>
+                        <h4>DUE: SEPT 10, 2022</h4>
+                    </div>-->
+                    <!--<div class="progress3 progress">
+                        <p>In Progress</p>
+                        <h3>QWERTY Development</h3>
+                        <p>Completed: 56/60</p>
+                        <a href="#">Continue</a><br>
+                        <progress value="56" max="60"></progress>
+                        <h4>DUE: AUG 5, 2022</h4>
+                    </div>
+                    <div class="progress4 progress">
+                        <p>In Progress</p>
+                        <h3>MNOP Development</h3>
+                        <p>Completed: 12/100</p>
+                        <a href="#">Continue</a><br>
+                        <progress value="12" max="100"></progress>
+                        <h4>DUE: NOV 30, 2022</h4>
+                    </div>-->
+                </div>
+            </div>
+            <!--<div class="midRight">
+               
+              <img src='/static/logo.png' style='width:300px;height:300px;'> 
+            </div>-->
+        </section>
+      
+    </body>
+</html>

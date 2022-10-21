@@ -1,0 +1,73 @@
+/* Store this code in 'style.css' file inside the 'static' folder*/
+body{
+    background-image: linear-gradient(to right, #434343 0%, black 100%);;
+}
+.header{
+    padding: 5px 120px;
+    width: 150px;
+    height: 70px;
+
+}
+
+.border{
+    padding: 80px 50px;
+    width: 400px;
+    height: 450px;
+   
+    border-radius: 0px;
+    background-image: #f5e0e0;;
+   
+}
+
+.btn {
+    padding: 10px 40px;
+    background-color: transparent;
+    color: #FFFFFF;
+    font-style: oblique;
+    font-weight: bold;
+    font-size:20px;
+    border-radius: 30px;
+}
+.btn:hover{
+  padding: 10px 40px;
+  background-color:#c78727;
+  color: #000000;
+  font-style: oblique;
+  font-weight: bold;
+  
+}
+
+.textbox{
+    padding: 10px 40px;
+    background-color:transparent;
+    color: #FFFFFF;
+    border-radius: 10px;
+    border:none;
+ 
+}
+.textbox:hover{
+  padding: 10px 40px;
+  background-color:transparent;
+  color: #000000;
+  background-color:#c78727;
+  border:none;
+}
+    
+::placeholder {
+    color: #FFFFFF;
+    opacity: 1;
+    font-style: oblique;
+    font-weight: bold;
+}
+
+.word{
+    color: #FFFFFF;
+    font-style: oblique;
+    font-weight: bold;
+}
+
+.bottom{
+    color: #236B8E;
+    font-style: oblique;
+    font-weight: bold;
+}

@@ -1,0 +1,194 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<head>
+      
+     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30=" crossorigin="anonymous"></script>
+</head>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+		<!-- The list -->
+<div>
+    <!-- First item -->
+    <div>
+        <table>
+            <!-- The first row of original table -->
+            <tr>
+             <th>No</th>
+                <th>ID</th>
+                <th>CLIENT NAME</th>
+                <th>TASK</th>
+                <th>PRIORITY</th>
+                <th>ASSIGN TO</th>
+                <th>STATUS<th>
+                <th>DATE</th>
+                <th>ACTION</th>
+                <th>DRAG<th>
+            </tr>
+        </table>
+    </div>
+
+    <!-- Second item -->
+    <div>
+        <table>
+            {% for row in employees %}
+            <tr>
+            </td>
+            {{NO}}</td>
+                <td>{{row.id}}</td>
+                <td>{{row.name}}</td>
+                <td>{{row.email}}</td>
+                <td>{{row.phone}}</td>
+                <td>{{row.assign}}</td>
+                <td>{{row.status}}</td>
+                <td></td>
+                <td>{{row.d}}
+                
+                
+
+                <td>
+                    <a href="/update/{{row.id}}" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#modaledit{{row.id}}">Edit</a>
+                    <a href="/delete/{{row.id}}" class="btn btn-danger btn-xs" onclick="return confirm('Are You Sure To Delete ?')">Delete</a>
+
+
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+   
+</div>
+
+
+        </div>
+      </div>
+    </div>
+    <script>
+       // Query the table
+const table = document.getElementById('table');
+
+const mouseDownHandler = function(e) {
+    ...
+
+    // Attach the listeners to `document`
+    document.addEventListener('mousemove', mouseMoveHandler);
+    document.addEventListener('mouseup', mouseUpHandler);
+};
+
+const mouseMoveHandler = function(e) {
+    ...
+};
+
+const mouseUpHandler = function() {
+    ...
+    // Remove the handlers of `mousemove` and `mouseup`
+    document.removeEventListener('mousemove', mouseMoveHandler);
+    document.removeEventListener('mouseup', mouseUpHandler);
+};
+
+// Query all rows
+table.querySelectorAll('tr').forEach(function(row, index) {
+    // Ignore the header
+    // We don't want user to change the order of header
+    if (index === 0) {
+        return;
+    }
+
+    // Get the first cell of row
+    const firstCell = row.firstElementChild;
+    firstCell.classList.add('draggable');
+
+    // Attach event handler
+    firstCell.addEventListener('mousedown', mouseDownHandler);
+});
+let isDraggingStarted = false;
+
+const mouseMoveHandler = function(e) {
+    if (!isDraggingStarted) {
+        isDraggingStarted = true;
+
+        cloneTable();
+    }
+    ...
+};
+let list;
+
+const cloneTable = function () {
+    // Get the bounding rectangle of table
+    const rect = table.getBoundingClientRect();
+
+    // Get the width of table
+    const width = parseInt(window.getComputedStyle(table).width);
+
+    // Create new element
+    list = document.createElement('div');
+
+    // Set the same position as table
+    list.style.position = 'absolute';
+    list.style.left = `${rect.left}px`;
+    list.style.top = `${rect.top}px`;
+
+    // Insert it before the table
+    table.parentNode.insertBefore(list, table);
+
+    // Hide the table
+    table.style.visibility = 'hidden';
+};
+const cloneTable = function() {
+    ...
+
+    // Loop over the rows
+    table.querySelectorAll('tr').forEach(function(row) {
+        const item = document.createElement('div');
+
+        const newTable = document.createElement('table');
+        const newRow = document.createElement('tr');
+
+        // Query the cells of row
+        const cells = [].slice.call(row.children);
+        cells.forEach(function(cell) {
+            const newCell = cell.cloneNode(true);
+            newRow.appendChild(newCell);
+        });
+
+        newTable.appendChild(newRow);
+        item.appendChild(newTable);
+
+        list.appendChild(item);
+    });
+};
+cells.forEach(function (cell) {
+    const newCell = cell.cloneNode(true);
+    // Set the width as the original cell
+    newCell.style.width = `${parseInt(window.getComputedStyle(cell).width)}px`;
+    newRow.appendChild(newCell);
+});
+let draggingEle; // The dragging element
+let draggingRowIndex; // The index of dragging row
+
+const mouseDownHandler = function (e) {
+    // Get the original row
+    const originalRow = e.target.parentNode;
+    draggingRowIndex = [].slice.call(table.querySelectorAll('tr')).indexOf(originalRow);
+};
+
+const mouseMoveHandler = function (e) {
+    if (!isDraggingStarted) {
+        cloneTable();
+
+        // Query the dragging element
+        draggingEle = [].slice.call(list.children)[draggingRowIndex];
+    }
+};
+
+const mouseUpHandler = function () {
+    // Get the end index
+    const endRowIndex = [].slice.call(list.children).indexOf(draggingEle);
+};
+    </script>
+    
+   

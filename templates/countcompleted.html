@@ -1,0 +1,725 @@
+{% extends 'base.html' %}
+{% include 'header.html' %}
+{% include 'index.html'%}
+
+
+
+{% block title %} Home {% endblock %}
+
+
+
+{% block body %}
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fira+Sans:wght@100;200;300;400;500;600;700;800;900&display=swap');
+*{
+padding: 0; margin: 0; user-select: none;
+font-family: 'Fira Sans', sans-serif;
+}
+body{
+width: 100%;
+min-height: 100vh;
+background-image: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%);
+}
+::-webkit-scrollbar {
+width: 8px;
+}
+::-webkit-scrollbar-track {
+background: white; 
+}
+::-webkit-scrollbar-thumb {
+background: linear-gradient(0, #845EC2, #D65DB1, #FF6F91, #FF9671, #FFC75F, #F9F871); border-radius: 100px;
+}
+::-webkit-scrollbar-thumb:hover {
+background: #D65DB1; 
+}
+a{
+text-decoration: transparent;
+}
+#nav{
+width: 96%; height: 60px; margin: 10px 2% 10px 2%;
+background-color: rgba(255,255,255,0.2);
+display: flex; align-items: center; justify-content: space-evenly;
+box-shadow: 0 0 10px rgba(0,0,0,0.1);
+border-radius: 6px;
+}
+.navLeft{
+width: 20%; height: 100%;
+display: flex; align-items: center;
+}
+.navLeft h1{
+font-size: 35px; color: black;
+text-shadow: 0 0 1px black;
+}
+.search{
+width: 35%;
+height: 100%;
+display: flex; align-items: center;
+justify-content: center;
+}
+.search input[type="text"]{
+width: 100%; height: 25px;
+outline: none; border: none;
+padding: 0 5px 0 5px;
+background-color: transparent;
+font-family: 'Fira Sans', sans-serif;
+font-weight: 700;
+border-bottom: 3px solid #D65DB1;
+color: rgba(0,0,0,0.7);
+}
+.search img{
+width: 15px; height: 15px;
+cursor: pointer;
+}
+.navRight{
+width: 15%; display: flex;
+align-items: center; justify-content: center;
+}
+#navList{
+width: 100%;
+display: flex; align-items: center;
+justify-content: space-evenly;
+}
+#navList li{
+display: flex; align-items: center; justify-content: center;
+}
+#navList img{
+width: 25px; height: 25px;
+}
+#navList li a span{
+display: none;
+}
+#mid{
+width: 96%; padding: 10px 2% 10px 2%;
+display: flex; flex-wrap: wrap;
+}
+.midLeft, .midRight{
+width: 180px; background-color: rgba(255,255,255,0.2);
+margin: 5px 2% 5px 0; border-radius: 8px;
+height: 600px; box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+.list{
+height: 300px; display: flex; align-items: center; width: 180px;
+}
+.list ul li{
+display: flex; align-items: center;
+margin: 5px; width: 170px;
+height: 50px;
+cursor: pointer;
+}
+.list ul li:hover, .active{
+background-color: #D65DB1; border-radius: 5px;
+}
+.list img{
+width: 20px; height: 20px; float: left;
+padding-left: 10px;
+}
+.list ul li span{
+padding-left: 10px; font-weight: 700;
+}
+li{
+list-style: none;
+}
+.midRight{
+width: 500px; display: flex; flex-direction: column;
+align-items: center; justify-content: space-evenly;
+}
+.midRight h2{
+font-weight: 900; font-size: 30px;
+}
+.midRight li{
+margin: 8px; cursor: pointer;
+padding: 5px; background-color: rgba(255,255,255,0.1);
+border-radius: 8px;
+}
+.midRight li h3{
+color: #845EC2; font-weight: 700;
+}
+.midMid{
+width: 50%;
+flex-direction: column;
+display: flex; align-items: center;
+margin: 5px 2% 5px 0;
+}
+.midMid1, .midMid2{
+background-color: rgba(255,255,255,0.2); width: 100%;
+display: flex; justify-content: space-evenly;
+align-items: center; height: 100px; border-radius: 8px;
+box-shadow: 0 0 10px rgba(0,0,0,0.1);
+margin-bottom: 20px; flex-wrap: wrap;
+}
+.topHead{
+width: 30%;
+}
+.topHead h1{
+font-size: 35px; font-weight: 900;
+}
+.topHead p{
+color: #845EC2; font-weight: 900;
+}
+.midMid1 ul{
+width: 60%; text-align: center;
+display: flex; align-items: center; justify-content: space-evenly;
+}
+.midMid1 ul li h3{
+font-weight: 900; font-size: 30px;
+}
+.midMid2{
+height: 50px;
+}
+.midMid2 ul{
+width: 90%; justify-content: space-evenly; align-items: center; height: 90%;
+display: flex;
+}
+.midMid2 ul li{
+cursor: pointer; font-size: 15px;
+font-weight: 700; width: 22%; justify-content: center; align-items: center; height: 80%;
+display: flex;
+}
+.midMid2 ul hr{
+width: 1px; height: 18px; background-color: black; border: none;
+}
+.activeMid{
+color: #845EC2;
+border-radius: 2px;
+}
+.midMid3{
+width: 100%; border-radius: 8px; display: flex;
+flex-wrap: wrap; align-items: center; justify-content: space-evenly;
+}
+.progress{
+display: flex; flex-direction: column; justify-content: space-evenly;
+width: 40%; background-color: rgba(255,255,255,0.1); margin: 2%;
+padding: 3%; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+progress{
+height: 20px;
+width: 100%;
+}
+.progress h3{
+font-size: 22px; color: black;
+}
+.progress a{
+font-size: 15px; height: 35px;
+margin-top: 10px; display: flex; align-items: center;
+justify-content: center; border-radius: 8px;
+width: 40%; text-align: center;
+background-color: black; color: white;
+}
+#footer{
+float: right;
+}
+#footer a{
+text-transform: uppercase;
+font-weight: 900;
+color: black;
+}
+
+
+@media only screen and (max-width: 900px) {
+#nav{
+justify-content: space-between;
+}
+.navLeft{
+margin-left: 10px;
+}
+.menu{
+width: 40px; height: 40px;
+border-radius: 50%;
+display: flex;
+align-items: center;
+justify-content: center;
+cursor: pointer;
+}
+.menu .bar{
+display: block;
+position: absolute;
+width: 25px; height: 2px;
+background-color: black;
+}
+.b1{
+transform: translateY(-5px);
+}
+.b3{
+transform: translateY(5px);
+}
+#navList{
+display: none;
+flex-direction: column;
+position: absolute;
+top: 90px;
+height: 200px;
+z-index: 100; box-shadow: 0 0 10px rgba(0,0,0,0.1);
+border-radius: 5px;
+left: 0;
+width: 96%;
+margin: 5px 2% 5px 2%;
+background-color: #fff;
+}
+#navList li a{
+text-align: left;
+width: 120px;
+padding: 5px 0;
+}
+#navList li img{
+float: left; width: 18px; height: 18px;
+}
+#navList li a span{
+display: flex; font-size: 16px;
+padding: 0 5px; font-weight: 400;
+color: black;
+}
+.search{
+display: none;
+}
+.symbol{
+display: block;
+width: 50px; height: 50px;
+background-color: rgba(255,255,255,0.2);
+display: flex; align-items: center; justify-content: center;
+box-shadow: 0 0 10px rgba(0,0,0,0.1);
+border-radius: 50%; cursor: pointer; position: absolute;
+right: 5px; bottom: 5px; position: fixed;
+}
+.cross{
+width: 25px; height: 3px;
+background-color: black;
+position: absolute; border-radius: 100px;
+}
+.c2{
+transform: rotate(90deg);
+}
+.midLeft{
+display: none;
+background-color: white;
+width: 50px; height: 300px;
+position: absolute; bottom: 70px;
+right: 0; position: fixed;
+}
+.list{
+width: 50px;
+}
+.list ul li{
+width: 40px;
+}
+.list ul li span{
+display: none;
+}
+.midRight{
+width: 98%;
+}
+.midRight ul li{
+width: 95%;
+}
+.midMid{
+width: 100%;
+}
+.midMid1{
+flex-direction: column; height: 200px;
+}
+.topHead{
+width: 100%; text-align: center;
+}
+.midMid1 ul{
+width: 100%;
+}
+.midMid2 hr{
+display: none;
+}
+.progress{
+width: 100%; min-height: 200px;
+}
+}
+.anim-btn {
+	width: max-content;
+	margin: 0 auto;
+	position: relative;
+	overflow: hidden;
+}
+
+.anim-btn__button {
+	padding: 16px 32px 13px;
+	background-color: rgba(0, 0, 0, 0);
+	border: 1px solid #534e4a;
+	color: #534e4a;
+	font-size: 16px;
+	font-weight: 700;
+	text-transform: uppercase;
+	transition: color 300ms ease, transform 300ms ease;
+
+	&:hover,
+	&:focus {
+		color: #fff;
+		cursor: pointer;
+	}
+
+	&:hover + .anim-btn__overlay,
+	&:focus + .anim-btn__overlay {
+		transform: translateY(calc(-100% + 2px));
+	}
+
+	&:active {
+		transform: scale(0.8);
+	}
+
+	&:active + .anim-btn__overlay {
+		transform: translateY(calc(-100% + 2px)) scale(0.8);
+	}
+}
+
+.anim-btn__overlay {
+	background-color: #534e4a;
+	height: calc(100% + 2px);
+	width: 100%;
+	position: absolute;
+	bottom: calc(-100% - 2px);
+	left: 0;
+	z-index: -1;
+	transition: transform 300ms ease;
+}
+</style>
+<div class="container" style='display:flex;justify-content:space-between;align-items:flex-start;margin-left:0px;padding:30px;height:100vh;width:100%;margin-top:0px;'>
+  <nav class="sidebar close">
+    <header>
+      <div class="image-text">
+       
+  
+      
+      </div>
+  
+      <i class='bx bx-chevron-right toggle'></i>
+    </header>
+  
+    <div class="menu-bar">
+      <div class="menu" style="position:fixed;left:-10px;top:80px;">
+  
+     
+  
+        <ul class="menu-links">
+          <div class="midLeft" id="work" style="margin-left:50px;width:300px; background:white;">
+             <div class="list" style="margin-left:0px;">
+                 <ul>
+                    
+                     <li ><a href="http://127.0.0.1:5000/allclient" style='color:black;'><span>ADD CLIENT</span></a></li>
+                     <li class="active" ><a href="http://127.0.0.1:5000/showtask" style='color:black;'><span>ADD TASK</span></a></li>
+                     <!--<li><a href="http://127.0.0.1:5000/today" style='color:black;'><span>TODAY'S TASK</span></a></li>-->
+                     <li><a href='/' style='color:black;'><span>LOG OUT</span></a></li>
+                 </ul>
+             </div>
+          </div>
+      </div>
+  
+   
+      <!--=========================================================-->
+     
+    </div>
+  
+    </nav>
+   
+    <div class="row" style='margin-left:400px;width:1300px;'>
+        <div class="col md-12">
+          <form  action='{{url_for('Index')}}' method="POST">
+         
+         
+          <div class="form-group">
+            
+         </div>
+
+          </form> 
+           <!--========================== Date Search ===============================-->
+         <form action='{{url_for('t')}}' method="POST" id='myForm'>
+            <div class="form-group" style='width:200px;padding:10px;position:relative;top:-10px;left:1000px;'>
+               <label for='datesearch' style='padding:5px;'></label>
+               <input type='date' name='d' id='d'  placeholder=""/ style='padding:15px;background:#rg4343;color:black;border:1px solid white;' onchange="myForm()" >
+               
+            </div>
+         </form>
+         <!--=================================================Data fetch ====================================================================================================-->
+ 
+            <tr>
+
+                <th>COMPLETED</th>
+ 
+            </tr>
+
+
+           {% for row in data %}
+            <tr class="ui-state-default" draggable='true' ondragstart='start()' ondragover='dragover()'>
+                <td>{{row.0}}</td>
+    
+            </tr>
+            {% endfor %}
+         
+      
+         <!--========================== Date Search^^^^^^^ ===============================-->
+         <div class="anim-btn" style="text-decoration:none;background-image:background: linear-gradient(to bottom, rgba(255,255,255,0.15) 0%, rgba(0,0,0,0.15) 100%), radial-gradient(at top center, rgba(255,255,255,0.40) 0%, rgba(0,0,0,0.40) 120%) #989898;
+         background-blend-mode: multiply,multiply;">
+         <a href="http://127.0.0.1:5000/today" style='text-decoration:none;' >
+          
+            <button class="anim-btn__button">TODAY'S TASK 
+               <br>01
+                        </button>
+                     </a>
+                 
+         <a href="http://127.0.0.1:5000/complated" style='text-decoration:none;color:black;'  >
+           
+         
+   <button class="anim-btn__button" > COMPLETED 
+      
+        
+               </button> 
+        
+         
+            </a>
+
+            
+             
+               <!--<a href="http://127.0.0.1:5000/pending" style="text-decoration:none;color:black;"> <button class="anim-btn__button">PENDING</button></a>-->
+               <a href="http://127.0.0.1:5000/inque" style="text-decoration:none;color:black;">
+                <button class="anim-btn__button">IN QUE
+                  <br>
+                  03
+               </button>
+           
+                  <br><a>
+                   
+            <!--<a href="http://127.0.0.1:5000/workinprogress" style="text-decoration:none;color:black;"> <button class="anim-btn__button">WORK IN PROGRESS</button></a>-->
+           <div class="anim-btn__overlay">
+            
+           </div>
+           
+        </div>
+       
+        </div>
+            <div class="jumbotron p-3" style='width:1200px;padding:20px;'>
+
+                <h2>Manage <b>TASK </b><button type="button"  class="btn btn-success float-right"
+                data-toggle="modal" data-target="#mymodal">ADD NEW TASK</button> </h2>
+                
+
+
+                {% with messages = get_flashed_messages() %}
+
+                {% if messages %}
+
+                {% for message in messages %}
+
+                <div class="alert alert-success alert-dismissable" role="alert">
+
+                    <button type="button" class="close" data-dismiss="alert" aria-label="close">
+
+                        <span aria-hidden="true">x</span>
+
+                    </button>
+
+
+                {{message}}
+
+
+                </div>
+
+
+                {% endfor %}
+
+                {% endif %}
+                {% endwith %}
+
+                <!--=============================================For Count Fetch -->
+           
+                
+                  
+           
+                <!--=======================================================================================================-->
+                <table class="table table-hover table-dark" id="table">
+
+                    <tr>
+
+                        <th>SR.NO</th>
+                        <th>CLIENT NAME</th>
+                        <th>TASK</th>
+                        <th>ASSIGN TO</th>
+                        <th>STATUS</th>
+                        <th>DATE<th>
+                           <th>ACTION</th>
+                       
+                           
+                        
+                 
+                     
+                   
+                        <!---<th>CLIENT_ID</th>-->
+
+                    </tr>
+
+
+                   {% for row in data %}
+                    <tr class="ui-state-default" draggable='true' ondragstart='start()' ondragover='dragover()'>
+                        <td>{{row.0}}</td>
+                        <td>{{row.1}}</td>
+                        <td>{{row.2}}</td>
+                        <td>{{row.4}} </td>
+                        <td>{{row.5}} </td>
+                 <td>{{row.6}}</td>
+                 <td></td>
+                        
+                        
+                        
+
+                        <td>
+                            <a href="/update/{{row.0}}" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#modaledit{{row.0}}">Edit</a>
+                            <a href="/delete/{{row.0}}" class="btn btn-danger btn-xs" onclick="return confirm('Are You Sure To Delete ?')">Delete</a>
+                            <a href="/done/{{row.0}}"  class="btn btn-success" onclick="return confirm('Are You Sure The task is COMPLETED ?')">DONE</a>
+                        </td>
+
+                    </tr>
+
+
+                  <!-- Modal Edit TASK-->
+<div id="modaledit{{row.0}}" class="modal fade" role="dialog">
+   <div class="modal-dialog">
+
+
+      <div class="modal-content">
+
+
+         <div class="modal-header">
+
+
+            <h4 class="modal-title">Update Information</h4>
+
+
+         </div>
+
+
+         <div class="modal-body">
+
+
+            <form action="{{url_for('update')}}" method="POST">
+
+
+                
+
+
+             
+
+
+
+   
+        
+       
+<!--========================================================For DONE BUTTON-->
+  
+
+               <!-- ==============================================================-->
+
+
+            </form>
+
+
+         </div>
+
+
+         <div class="modal-footer">
+
+
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+
+         </div>
+
+
+      </div>
+
+
+   </div>
+
+</div>
+
+
+                    {% endfor %}
+
+
+                </table>
+
+
+            </div>
+
+
+
+                  <!--======================================================== Modal Add TASK=========================================================-->
+
+
+<div id="mymodal" class="modal fade" role="dialog">
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="modal-header">
+
+            <h4 class="modal-title">ADD TASK</h4>
+         </div>
+         <div class="modal-body">
+
+            <form action="{{url_for('insert')}}" method="POST">
+
+          
+             
+
+           
+
+              
+         
+           
+
+              
+
+            </form>
+
+
+         </div>
+
+
+
+      </div>
+
+
+   </div>
+
+
+</div>
+
+
+
+
+
+        </div>
+
+    </div>
+
+
+</div>
+
+<script>
+  var row;
+function start(){
+  row = event.target;
+}
+function dragover(){
+  var e = event;
+  e.preventDefault();
+
+  let children= Array.from(e.target.parentNode.parentNode.children);
+  if(children.indexOf(e.target.parentNode)>children.indexOf(row))
+    e.target.parentNode.after(row);
+  else
+    e.target.parentNode.before(row);
+}
+function myfunction(){
+   window.location.href = 'http://127.0.0.1:5000/t'
+}
+function myForm(){
+   document.getElementById("myForm").submit();
+ 
+}
+
+
+</script>
+
+{% endblock %}

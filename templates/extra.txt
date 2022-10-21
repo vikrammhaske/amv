@@ -1,0 +1,32 @@
+<header>
+    <div class="image-text">
+
+    </div>
+
+    <i class='bx bx-chevron-right toggle'></i>
+  </header>
+
+  <div class="menu-bar">
+    <div class="menu" style="position:fixed;left:-10px;top:-0px;">
+
+   
+
+      <ul class="menu-links">
+        <div class="midLeft" id="work" style="margin-left:50px;width:300px;">
+         <a href='http://127.0.0.1:5000/showtask'> <img src='static/logo.png' style='height:200px;width:200px;margin-left:30px;margin-top:30px;position:relative;top:-30px;'></a>
+
+           <div class="list" style="margin-left:0px;">
+               <ul>
+                                      <li ><a href="http://127.0.0.1:5000/allclient" style='color:white;'><span>ADD CLIENT</span></a></li>
+                   <li class="active" ><a href="http://127.0.0.1:5000/showtask" style='color:white;'><span>ADD TASK</span></a></li>
+                   <!--<li><a href="http://127.0.0.1:5000/today" style='color:black;'><span>TODAY'S TASK</span></a></li>-->
+                   <li><a href='/' style='color:white;'><span>LOG OUT</span></a></li>
+               </ul>
+           </div>
+        </div>
+    </div>
+
+ 
+    <!--=========================================================-->
+   
+  </div>

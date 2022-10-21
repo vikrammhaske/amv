@@ -1,0 +1,53 @@
+<!-- Store this code in 'login.html' file inside the 'templates' folder -->
+
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title> Login </title>
+		<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">		
+	</head>
+	<body></br></br></br></br></br>
+		<div align="center">
+		<div align="center" class="border" style="">
+			<div class="header" style='display:flex;justify-content:center;'>
+			
+				<img src='/static/logo.png' style='width:350px;height:200px;padding-top:0px;'>
+				<img src='/static/micro.png' style='width:350px;height:200px;padding-top:-30px;'>
+				<img src='/static/viw.png' style='width:350px;height:200px;padding-top:0px;'>
+
+			</div></br></br></br>
+			<h2 class="word">
+			
+				<form action="{{ url_for('login') }}" method="post">
+				<div class="msg"></div>
+					<input id="username" name="username" type="text" placeholder="Enter Your Username" class="textbox"/></br></br>
+					<input id="password" name="password" type="password" placeholder="Enter Your Password" class="textbox"/></br></br>
+					
+					<select type='text' id='role' class="textbox" name="role" placeholder='select company' value="" required >
+						<option value="SELECT COMPANY " >
+					   <i>SELECT COMPANY</i> 
+						  </option>
+						  <option value="admin">
+						   ADMIN
+						  </option>
+						  <option value="andwemedia">
+						   & WE MEDIA
+						  </option>
+						  <option value="viw3d">
+						   VIW3D
+						  </option>
+						  <option value="micrografix">
+						   MICROGRAFIX
+						  </option>
+					   </select>
+					</br></br>
+					<input type="submit" class="btn" value="Login"></br></br>
+					
+       
+				</form>
+			</h2>
+		
+		</div>
+		</div>
+	</body>
+</html>

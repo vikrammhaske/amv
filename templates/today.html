@@ -1,0 +1,416 @@
+
+{% extends 'base.html' %}
+{% include 'header.html' %}
+
+
+
+{% block title %} Home {% endblock %}
+
+
+
+{% block body %}
+
+<div class="container" style='display:flex;justify-content:space-between;align-items:flex-start;margin-left:0px;padding:30px;height:100vh;width:100%;margin-top:0px;'>
+   <nav class="sidebar close">
+      <header>
+        <div class="image-text">
+         
+    
+        
+        </div>
+    
+        <i class='bx bx-chevron-right toggle'></i>
+      </header>
+    
+      <div class="menu-bar">
+        <div class="menu" style="position:fixed;left:-10px;top:80px;">
+    
+       
+    
+          <ul class="menu-links">
+            <li class="nav-link">
+              <a href="#">
+                <i class='bx bx-home-alt icon'></i>
+                <span class="text nav-text"> <a href="http://127.0.0.1:5000/dashboard">HOME</a></span>
+              </a>
+            </li>
+
+            <li class="nav-link">
+               <a href="#">
+                 <i class='bx bx-pie-chart-alt icon'></i>
+                 <span class="text nav-text"><a href="http://127.0.0.1:5000/addhome">ADD Client</a></span>
+               </a>
+             </li>
+
+            <li class="nav-link">
+              <a href="#">
+                <i class='bx bx-bar-chart-alt-2 icon'></i>
+                <span class="text nav-text"><a href="http://127.0.0.1:5000/showtask">ADD TASK</a></span>
+              </a>
+            </li>
+    
+            <li class="nav-link">
+              <a href="#">
+                <i class='bx bx-bell icon'></i>
+                <span class="text nav-text"><a href="/showtask">SHOW TASK</a></span>
+              </a>
+            </li>
+            <li class="nav-link">
+              <a href="#">
+                <i class='bx bx-bell icon'></i>
+                <span class="text nav-text"><a href="/today">TODAY'S TASK</a></span>
+              </a>
+            </li>
+    
+            
+   
+            <li class="nav-link">
+              <a href="#">
+                <i class='bx bx-pie-chart-alt icon'></i>
+                <span class="text nav-text"></span>
+              </a>
+            </li>
+          </ul>
+        </div>
+    
+        <div class="bottom-content" style="padding-top:700px;list-style-type:none;padding-left:0px;">
+          <li class="" style='padding:20px;color:red;'>
+            <a href="#">
+              
+              <span class="text nav-text" ><a href="/">LOG OUT</a></span>
+            </a>
+          </li>
+    
+         
+        </div>
+      </div>
+    
+    </nav>
+   
+    <div class="row" style='padding-left:200px;width:80%;'>
+        <div class="col md-12">
+          <p> <label for="date_search" style="margin-right:10px;">SELECT DATE: </label><input type='date' name='date_search' value='date_search'><button type="button" style='margin-left:10px;' >Search</button> </p>
+            <div class="jumbotron p-3" style='width:1000px;padding:20px;'>
+
+                <h2>Manage <b>TASK </b><button type="button"  class="btn btn-success float-right"
+                data-toggle="modal" data-target="#mymodal">ADD NEW TASK</button> </h2>
+                
+
+
+                {% with messages = get_flashed_messages() %}
+
+                {% if messages %}
+
+                {% for message in messages %}
+
+                <div class="alert alert-success alert-dismissable" role="alert">
+
+                    <button type="button" class="close" data-dismiss="alert" aria-label="close">
+
+                        <span aria-hidden="true">x</span>
+
+                    </button>
+
+
+                {{message}}
+
+
+                </div>
+
+
+                {% endfor %}
+
+                {% endif %}
+                {% endwith %}
+
+                
+                <table class="table table-hover table-dark">
+
+                    <tr>
+
+                        <th>ID</th>
+                        <th>CLIENT NAME</th>
+                        <th>TASK</th>
+                        <th>PRIORITY</th>
+                        <th>ASSIGN TO</th>
+                        <th>STATUS<th>
+                        <th>DATE</th>
+                        <th>ACTION</th>
+
+                    </tr>
+
+
+                   {% for row in employees %}
+                    <tr>
+                        <td>{{row.id}}</td>
+                        <td>{{row.name}}</td>
+                        <td>{{row.email}}</td>
+                        <td>{{row.phone}}</td>
+                        <td>{{row.assign}}</td>
+                        <td>{{row.status}}</td>
+                        <td></td>
+                        <td>{{row.d}}</td>
+                        
+
+                        <td>
+                            <a href="/update/{{row.id}}" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#modaledit{{row.id}}">Edit</a>
+                            <a href="/delete/{{row.id}}" class="btn btn-danger btn-xs" onclick="return confirm('Are You Sure To Delete ?')">Delete</a>
+
+
+                        </td>
+
+                    </tr>
+
+
+                  <!-- Modal Edit Employee-->
+<div id="modaledit{{row.id}}" class="modal fade" role="dialog">
+   <div class="modal-dialog">
+
+
+      <div class="modal-content">
+
+
+         <div class="modal-header">
+
+
+            <h4 class="modal-title">Update Information</h4>
+
+
+         </div>
+
+
+         <div class="modal-body">
+
+
+            <form action="{{url_for('update')}}" method="POST">
+
+
+                <div class="form-group">
+
+                  
+                    <label>CLIENT NAME:</label>
+                    <input type="hidden"  name="id" value="{{row.id}}">
+                    <select type='text' class="form-control" name="name"  value="{{row.name}}" >
+                      <option value="suraj">suraj</option>
+                    
+                    </select>
+                 </div>
+
+
+
+             
+
+                <div class="form-group">
+                    <label>TASK</label>
+                    <input type="text" class="form-control" name="email" required value={{row.email}}>
+  
+                 </div>
+                 
+
+
+                 <div class="form-group">
+
+                   
+                  <label for="phone">PRIORITY</label>
+                  <select type="text" class="form-control" name="phone"  value={{row.priority}}>
+                      <option value="High">High</option>
+                      <option value="Medium">Medium</option>
+                      <option value="low">low</option>
+                    
+                    </select>
+
+
+             </div>
+             <div class="form-group">
+               <label for="assign">ASSING_TO</label>
+               <select type="text" class="form-control" name="assign" required="1">
+                   <option value="MUZAMMIN">MUZAMMIN</option>
+                   <option value="VIKRAM">VIKRAM</option>
+                   <option value="SURAJ">SURAJ</option>
+                   <option value="FAYAZ">FAYAZ</option>
+                   <option value="ANIS">ANIS</option>
+                   <option value="PRATIK">PRATIK</option>
+                   <option value="ANIKET">ANIKET</option>
+                   <option value="AKASHY">AKASHY</option>
+                   <option value="ROHAN">ROHAN</option>
+                 </select>
+            </div>
+
+            <div class="form-group">
+               <label for="status">STATUS</label>
+               <select type="text" class="form-control" name="status" required="1">
+                   <option value="COMPLATED">COMPLATED</option>
+                   <option value="WORK IN PROGRESS">WORK IN PROGRESS</option>
+                   <option value="IN QUE">IN QUE</option>
+                   <option value="PENDING">PENDING</option>
+                  
+                 </select>
+            </div>
+
+            <div class="form-group">
+               <label for='d'>DATE:</label>
+               <input type='date' name='d'>
+            </div>
+               <div class="form-group">
+
+
+                  <button class="btn btn-primary" type="submit">Update</button>
+
+
+               </div>
+
+
+            </form>
+
+
+         </div>
+
+
+         <div class="modal-footer">
+
+
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+
+         </div>
+
+
+      </div>
+
+
+   </div>
+
+</div>
+
+
+                    {% endfor %}
+
+
+                </table>
+
+
+            </div>
+
+
+
+                  <!-- Modal Add Employee-->
+
+
+<div id="mymodal" class="modal fade" role="dialog">
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="modal-header">
+
+            <h4 class="modal-title">ADD TASK</h4>
+         </div>
+         <div class="modal-body">
+
+            <form action="{{url_for('insert')}}" method="POST">
+
+
+               <div class="form-group">
+
+                  
+                  <label>CLIENT NAME:</label>
+                  <select type='text' class="form-control" name="name" >
+                    <option value="suraj">suraj</option>
+              
+                  </select>
+               </div>
+
+
+                <div class="form-group">
+                  <label>TASK</label>
+                  <input type="text" class="form-control" name="email" required="1">
+
+               </div>
+
+
+                <div class="form-group">
+
+                   
+                    <label for="phone">PRIORITY</label>
+                    <select type="text" class="form-control" name="phone" required="1">
+                        <option value="High">High</option>
+                        <option value="Medium">Medium</option>
+                        <option value="low">low</option>
+                      
+                      </select>
+
+
+               </div>
+
+               <div class="form-group">
+                <label for="assign">ASSING_TO</label>
+                <select type="text" class="form-control" name="assign" required="1">
+                    <option value="MUZAMMIN">MUZAMMIN</option>
+                    <option value="VIKRAM">VIKRAM</option>
+                    <option value="SURAJ">SURAJ</option>
+                    <option value="FAYAZ">FAYAZ</option>
+                    <option value="ANIS">ANIS</option>
+                    <option value="PRATIK">PRATIK</option>
+                    <option value="ANIKET">ANIKET</option>
+                    <option value="AKASHY">AKASHY</option>
+                    <option value="ROHAN">ROHAN</option>
+                  </select>
+             </div>
+             <div class="form-group">
+                <label for="status">STATUS</label>
+                <select type="text" class="form-control" name="status" required="1">
+                    <option value="COMPLATED">COMPLATED</option>
+                    <option value="WORK IN PROGRESS">WORK IN PROGRESS</option>
+                    <option value="IN QUE">IN QUE</option>
+                    <option value="PENDING">PENDING</option>
+                   
+                  </select>
+             </div>
+             <div class="form-group">
+                <label for='d'>DATE:</label>
+                <input type='date' name='d'>
+             </div>
+
+               <div class="form-group">
+
+
+                  <button class="btn btn-primary" type="submit">ADD TASK</button>
+
+
+               </div>
+
+
+            </form>
+
+
+         </div>
+
+
+         <div class="modal-footer">
+
+
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+
+         </div>
+
+
+      </div>
+
+
+   </div>
+
+
+</div>
+
+
+
+
+
+        </div>
+
+    </div>
+
+
+</div>
+
+
+{% endblock %}

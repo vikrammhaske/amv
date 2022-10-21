@@ -1,0 +1,315 @@
+{% extends 'base.html' %}
+{% include 'header.html' %}
+
+
+
+{% block title %} Home {% endblock %}
+
+
+
+{% block body %}
+
+<div class="container">
+    <div class="btn-group" role="group" aria-label="Basic example">
+        <button type="button" class="btn btn-primary" ><a href="/dashboard" style="color:white;">Home</a></button>
+  
+      </div>
+    <div class="row">
+        <div class="col md-12">
+
+            <div class="jumbotron p-3">
+
+                <h2>Manage <b>TASK </b>  <button type="button"  class="btn btn-success float-right"
+                data-toggle="modal" data-target="#mymodal">ADD NEW TASK</button> </h2>
+                
+
+
+                {% with messages = get_flashed_messages() %}
+
+                {% if messages %}
+
+                {% for message in messages %}
+
+                <div class="alert alert-success alert-dismissable" role="alert">
+
+                    <button type="button" class="close" data-dismiss="alert" aria-label="close">
+
+                        <span aria-hidden="true">x</span>
+
+                    </button>
+
+
+                {{message}}
+
+
+                </div>
+
+
+                {% endfor %}
+
+                {% endif %}
+                {% endwith %}
+
+                
+                <table class="table table-hover table-dark">
+
+                    <tr>
+
+                        <th>ID</th>
+                        <th>CLIENT NAME</th>
+                        <th>TASK</th>
+                        <th>PRIORITY</th>
+                        <th>ASSIGN TO</th>
+                        <th>STATUS<th>
+                        <th>DATE</th>
+                        <th>ACTION</th>
+
+                    </tr>
+
+
+                   {% for row in employees %}
+                    <tr>
+                        <td>{{row.id}}</td>
+                        <td>{{row.name}}</td>
+                        <td>{{row.email}}</td>
+                        <td>{{row.phone}}</td>
+                        <td>{{row.assign}}</td>
+                        <td>{{row.status}}</td>
+                        <td></td>
+                        <td>{{row.date}}</td>
+                        
+
+                        <td>
+                            <a href="/update/{{row.id}}" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#modaledit{{row.id}}">Edit</a>
+                            <a href="/delete/{{row.id}}" class="btn btn-danger btn-xs" onclick="return confirm('Are You Sure To Delete ?')">Delete</a>
+
+
+                        </td>
+
+                    </tr>
+
+
+                  <!-- Modal Edit Employee-->
+<div id="modaledit{{row.id}}" class="modal fade" role="dialog">
+   <div class="modal-dialog">
+
+
+      <div class="modal-content">
+
+
+         <div class="modal-header">
+
+
+            <h4 class="modal-title">Update Information</h4>
+
+
+         </div>
+
+
+         <div class="modal-body">
+
+
+            <form action="{{url_for('update')}}" method="POST">
+
+
+                <div class="form-group">
+
+                  
+                    <label>CLIENT NAME:</label>
+                    <input type="hidden"  name="id" value="{{row.id}}">
+                    <select type='text' class="form-control" name="name"  value="{{row.name}}" >
+                      <option value="apple">apple</option>
+                      <option value="samsung">Samsung</option>
+                      <option value="nokia">Nokia</option>
+                      <option value="Oppo">Oppo</option>
+                    </select>
+                 </div>
+
+
+
+             
+
+                <div class="form-group">
+                    <label>TASK</label>
+                    <input type="text" class="form-control" name="email" required value={{row.email}}>
+  
+                 </div>
+                 
+
+
+               <div class="form-group">
+
+
+                  <label>Phone:</label>
+
+                  <input type="text" class="form-control" name="phone" value="{{row.phone}}">
+
+
+               </div>
+
+
+               <div class="form-group">
+
+
+                  <button class="btn btn-primary" type="submit">Update</button>
+
+
+               </div>
+
+
+            </form>
+
+
+         </div>
+
+
+         <div class="modal-footer">
+
+
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+
+         </div>
+
+
+      </div>
+
+
+   </div>
+
+</div>
+
+
+                    {% endfor %}
+
+
+                </table>
+
+
+            </div>
+
+
+
+                  <!-- Modal Add Employee-->
+
+
+<div id="mymodal" class="modal fade" role="dialog">
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="modal-header">
+
+            <h4 class="modal-title">ADD TASK</h4>
+         </div>
+         <div class="modal-body">
+
+            <form action="{{url_for('insert')}}" method="POST">
+
+
+               <div class="form-group">
+
+                  
+                  <label>CLIENT NAME:</label>
+                  <select type='text' class="form-control" name="name" >
+                    <option value="apple">apple</option>
+                    <option value="samsung">Samsung</option>
+                    <option value="nokia">Nokia</option>
+                    <option value="Oppo">Oppo</option>
+                  </select>
+               </div>
+
+
+                <div class="form-group">
+                  <label>TASK</label>
+                  <input type="text" class="form-control" name="email" required="1">
+
+               </div>
+
+
+                <div class="form-group">
+
+                   
+                    <label for="phone">PRIORITY</label>
+                    <select type="text" class="form-control" name="phone" required="1">
+                        <option value="High">High</option>
+                        <option value="Medium">Medium</option>
+                        <option value="low">low</option>
+                      
+                      </select>
+
+
+               </div>
+
+               <div class="form-group">
+                <label for="assign">ASSING_TO</label>
+                <select type="text" class="form-control" name="assign" required="1">
+                    <option value="MUZAMMIN">MUZAMMIN</option>
+                    <option value="VIKRAM">VIKRAM</option>
+                    <option value="SURAJ">SURAJ</option>
+                    <option value="FAYAZ">FAYAZ</option>
+                    <option value="ANIS">ANIS</option>
+                    <option value="PRATIK">PRATIK</option>
+                    <option value="ANIKET">ANIKET</option>
+                    <option value="AKASHY">AKASHY</option>
+                    <option value="ROHAN">ROHAN</option>
+                  </select>
+             </div>
+             <div class="form-group">
+                <label for="status">STATUS</label>
+                <select type="text" class="form-control" name="status" required="1">
+                    <option value="COMPLATED">COMPLATED</option>
+                    <option value="WORK IN PROGRESS">WORK IN PROGRESS</option>
+                    <option value="IN QUE">IN QUE</option>
+                    <option value="PENDING">PENDING</option>
+                   
+                  </select>
+             </div>
+             <div class="form-group">
+                <label for='date'>DATE:</label>
+                <input type='date' name='date'>
+             </div>
+
+               <div class="form-group">
+
+
+                  <button class="btn btn-primary" type="submit">ADD TASK</button>
+
+
+               </div>
+
+
+            </form>
+
+
+         </div>
+
+
+         <div class="modal-footer">
+
+
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+
+         </div>
+
+
+      </div>
+
+
+   </div>
+
+
+</div>
+
+
+
+
+
+        </div>
+
+    </div>
+
+
+</div>
+
+
+{% endblock %}
